@@ -37,6 +37,20 @@ You will need port 5044 open for the event collector to send data into the datab
 ### 3.1.2 Web Proxy Settings
 If the ELK stack is being deployed behind a web proxy, and Docker isn't configured to use the proxy, the deploy script can hang without completing due to docker being unable to pull the required images. To configure Docker to use the web proxy in your environment, do the following before running the deployment script.
 
+Some tweaks for proxies to be used for script to work :
+Configure proxy for cURL with a .curlrc file in your home containing 
+proxy = "[protocol://][host][:port]"
+
+Configure system-wide proxy using :
+export http_proxy="http://[proxy address or IP]:[proxy port]"
+export https_proxy="http://[proxy address or IP]:[proxy port]"
+
+Configure GIT to use a proxy :
+sudo git config --global http.proxy http://proxy:8080
+sudo git config --global https.proxy http://proxy:8080
+
+
+
 1) Create a systemd drop-in directory for the Docker service:
 ```
 sudo mkdir -p /etc/systemd/system/docker.service.d
